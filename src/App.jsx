@@ -9,8 +9,28 @@ import Counter from './components/Counter'
 import Filters from './components/Filters'
 import NoteList from './components/NoteList'
 import AddNoteForm from './components/AddNoteForm'
+import { useEffect } from 'react'
 
 function App() {
+
+  /*const loadNotes = async () => {
+    const response = await fetch('http://localhost:3000/notes/');
+    const data = await response.json()
+  }
+
+
+  fetch('http://localhost:3000/notes/')
+  .then(response => response.json())
+  .then(data => console.log(data));*/
+
+  useEffect(() => {
+    fetch('http://localhost:3000/notes/')
+    .then(response => response.json())
+    .then(data => {
+      notesRAWSetter(data);
+      setNotes(data);
+    })
+  }, []);
 
   const pureNotes = [
     { id: 11, text: "première note" },
